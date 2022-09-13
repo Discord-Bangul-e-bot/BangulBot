@@ -1,7 +1,7 @@
-from discord.ext.commands.context import Context
+import abc
 from MyBot.formatter.Formatter import Formatter
+from typing import List, Optional, TypedDict
 from MyBot.interfaces import CTX
-from typing import Optional, TypedDict
 from server.users.models import Intimacy, User
 from server.cats.models import Cat
 from server.channels.models import Channel
@@ -80,3 +80,4 @@ class SpeakMeow:
             return Formatter("크르릉....")
         else:
             return Formatter("하아악!")
+        

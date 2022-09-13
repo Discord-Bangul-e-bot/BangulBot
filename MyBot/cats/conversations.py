@@ -5,11 +5,12 @@ from server.messages.models import Message
 from server.cats.models import Cat,CatSerializer
 from consts import COMMAND_PREFIX
 from MyBot.cats.functions import Interaction
-from MyBot.interfaces import CTX
-
+from MyBot.cats.functions import CTX
+from MyBot.decorators import permission_check
 
 @app.command()
-async def 넌누구니(ctx:Context):
+@permission_check
+async def 넌누구니(ctx,**kwargs):
     cat = Cat.get_cat_from_ctx(ctx)
     msg = f"자기 이름은 {cat.name}(이)라고 하는 것 같다"
     _msg = app.formatter.single_block(app.formatter.italic(msg))

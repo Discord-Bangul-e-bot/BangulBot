@@ -1,5 +1,5 @@
 import abc
-from typing import List, Optional
+from typing import Any, List, Optional
 from discord.ext.commands.context import Context
 
 class GuildInterface:
@@ -28,8 +28,8 @@ class CTX(Context,metaclass=abc.ABCMeta):
     channel:ChannelInterface
     attachments:List[AttachmentInterface]
     content:str
+    # action:Interaction
     
     @abc.abstractmethod
     async def send(self,*args,**kwargs):
         pass
-    

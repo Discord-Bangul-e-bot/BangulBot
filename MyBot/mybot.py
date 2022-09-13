@@ -1,3 +1,4 @@
+import functools
 import dotenv,subprocess
 from typing import Dict, TypedDict,Union
 import discord
@@ -5,6 +6,7 @@ from discord.ext import commands,tasks
 from discord.ext.commands.context import Context
 from MyBot.formatter.Formatter import Formatter
 from MyBot.interfaces import CTX
+from MyBot.cats.functions import Interaction
 from server import User
 from server.history.models import History
 from server.attachments.models import Attachment
@@ -39,6 +41,7 @@ class MyBot(commands.Bot):
     
     def get_author(self,ctx:Context):
         return ctx.author
+    
     
     @tasks.loop(seconds=60.0)
     async def increase_hungry(self):
