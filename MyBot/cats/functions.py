@@ -1,9 +1,10 @@
 from discord.ext.commands.context import Context
 from MyBot.formatter.Formatter import Formatter
 from MyBot.interfaces import CTX
-from server.cats.models import Cat
 from typing import Optional, TypedDict
 from server.users.models import Intimacy, User
+from server.cats.models import Cat
+from server.channels.models import Channel
 
 class GiveChurrResult(TypedDict):
     cat:Cat
@@ -21,6 +22,7 @@ class Interaction:
         self.user = User.get_user_from_ctx(ctx)
         self.cat = Cat.get_cat_from_ctx(ctx)
         self.intimacy = Intimacy.get_intimacy_from_ctx(ctx)
+        self.channel = Channel.get_channel_from_ctx(ctx)
         self.meow = SpeakMeow(user=self.user,cat=self.cat,intimacy=self.intimacy)
         
     def 너의이름은(self,name:str):
@@ -49,6 +51,7 @@ class SpeakMeow:
         
     @Formatter.cat_speak
     def curious(self):
+        """의문스러운"""
         if self.intimacy.intimacy>=50:
             return Formatter("웨ㅔ옹?")
         else:
@@ -56,7 +59,24 @@ class SpeakMeow:
     
     @Formatter.cat_speak
     def enthusiastic(self):
+        """열광적인"""
         if self.intimacy.intimacy>=50:
             return Formatter("에에에옹!")
         else:
             return Formatter("야옹!")
+        
+    @Formatter.cat_speak
+    def sad(self):
+        """슬픈"""
+        if self.intimacy.intimacy>=50:
+            return Formatter("야아옹...?")
+        else:
+            return Formatter("에옹...")
+        
+    @Formatter.cat_speak
+    def aggressive(self):
+        """공격적인"""
+        if self.intimacy.intimacy>=50:
+            return Formatter("크르릉....")
+        else:
+            return Formatter("하아악!")

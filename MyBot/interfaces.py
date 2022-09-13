@@ -14,7 +14,10 @@ class AttachmentInterface:
     id:int
     filename:str
     url:str
-    
+
+class ChannelInterface:
+    id:int
+    name:str
     
 class CTX(Context,metaclass=abc.ABCMeta):
     """
@@ -22,6 +25,7 @@ class CTX(Context,metaclass=abc.ABCMeta):
     """
     author:AuthorInterface
     guild:Optional[GuildInterface]
+    channel:ChannelInterface
     attachments:List[AttachmentInterface]
     content:str
     
