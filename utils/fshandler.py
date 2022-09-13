@@ -14,6 +14,7 @@ class Target:
         event_handler = Handler()
         self.observer.schedule(event_handler, self.watchDir,recursive=True)
         self.observer.start()
+        print(f"Watchdog is running on {self.watchDir}")
         try:
             while True:
                 time.sleep(1)
@@ -33,7 +34,7 @@ class Handler(FileSystemEventHandler):
 
     def on_created(self, event): #파일, 디렉터리가 생성되면 실행
         print(event)
-        # runDiscord()
+        app.runDevServer()
 
     def on_deleted(self, event): #파일, 디렉터리가 삭제되면 실행
         print(event)

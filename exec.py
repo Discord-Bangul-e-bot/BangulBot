@@ -8,6 +8,11 @@ from MyBot.cats.conversations import *
 
 from dotenv import load_dotenv
 load_dotenv()
-TOKEN = os.getenv("TOKEN","")
-print("Run! Discord Server!")
-app.run(TOKEN)
+
+def exec():
+    TOKEN = os.getenv("TOKEN","")
+    print("Run! Discord Server!")
+    app.run(TOKEN)
+    
+if __name__=="__main__":
+    exec()
