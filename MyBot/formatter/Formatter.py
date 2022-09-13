@@ -107,9 +107,3 @@ class Formatter(str):
         return Formatter(f"""```{code}
 {text}
 ```""")
-
-def debug(string:Formatter):
-    print(f"{string.lines=},{string}")
-
-string = Formatter("뉴라인").new_line().append("볼드").bold().new_line()
-debug(string)

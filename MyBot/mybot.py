@@ -17,10 +17,12 @@ class MyBot(commands.Bot):
     formatter=Formatter()
 
     def runDevServer(self):
+        print('Run Dev Server!')
         if self.process:
             print("kill discord server")
             self.process.terminate()
-        self.process = subprocess.Popen('python3 exec.py'.split(' '))
+        cmd = f'python3 exec.py'.split(' ')
+        self.process = subprocess.Popen(cmd)
 
     def get_context(self,*args,**kwargs):
         cmd = super().get_context(*args,**kwargs)
