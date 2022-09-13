@@ -7,6 +7,7 @@ from .users.models import Intimacy, User
 from .messages.models import Message
 from .history.models import History
 from .attachments.models import Attachment
+from .channels.models import Channel
 from .base.settings import mysql_db
 
 def column_exists(table_name:str,column_name:str):
@@ -15,7 +16,7 @@ def column_exists(table_name:str,column_name:str):
     return any(result)
 
 def create_tables():
-    mysql_db.create_tables([User,Message,History,Attachment,Cat,Intimacy])
+    mysql_db.create_tables([User,Message,History,Attachment,Cat,Intimacy,Channel])
     
         
 create_tables()

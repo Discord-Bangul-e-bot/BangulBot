@@ -1,7 +1,7 @@
 from typing import Union, overload
 from peewee import CharField,IntegerField,ForeignKeyField
 from discord.ext.commands.context import Context
-
+from MyBot.interfaces import CTX
 from server.base.models import BaseModel
 from server.cats.models import Cat
 
@@ -32,7 +32,7 @@ class User(BaseModel):
             return False
         
     @classmethod
-    def get_user_from_ctx(cls,ctx:Context):
+    def get_user_from_ctx(cls,ctx:CTX):
         user:User = User.get_by_id(ctx.author.id)
         return user
     
@@ -70,7 +70,7 @@ class Intimacy(BaseModel):
         return instance
     
     @classmethod
-    def get_intimacy_from_ctx(cls,ctx:Context):
+    def get_intimacy_from_ctx(cls,ctx:CTX):
         user = ctx.author
         guild = ctx.guild
         if guild:
