@@ -27,6 +27,12 @@ class BaseModel(Model):
 class PermissionModel(BaseModel):
     permission=BooleanField(default=True)
     
+    def check_permission(self):
+        if self.has_permission:
+            return True
+        else:
+            raise
+    
     @property
     def has_permission(self):
         return True if  self.permission else False
