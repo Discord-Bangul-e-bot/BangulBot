@@ -111,3 +111,8 @@ DB_NAME=DB_NAME
    |   |
    |
 ```
+
+5. 테스트 로케이션
+   1. https://discord.gg/FvJwWbYnFs
+6. 명령어
+   1. ?help
