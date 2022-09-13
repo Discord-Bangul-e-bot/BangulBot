@@ -4,6 +4,9 @@ from MyBot.base import app
 from MyBot.interfaces import CTX
 from MyBot.cats.functions import Interaction
 from discord.ext.commands.context import Context
+from MyBot.interfaces import CTX
+from MyBot.cats.functions import Interaction
+
 from server.users.models import User
 from server.channels.models import Channel
 
