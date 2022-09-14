@@ -15,6 +15,13 @@ class GiveChurrResult(TypedDict):
     amount:int
     message:str
 
+class BiteResult(TypedDict):
+    cat:Cat
+    result:bool
+    churr:int
+    target:Optional[User]
+    message:str
+    
 class Interaction:
     formatter=Formatter()
     def __init__(self,ctx:CTX):
@@ -29,6 +36,20 @@ class Interaction:
         self.cat.rename(name)
         self.cat.refresh()
         return True
+    
+    def 물어(self,name:str,amount=1):
+        users = self.user.find_by_name(name)
+        if users:
+            target:User = users[0]
+            if target.have_churr(amount):
+                msg = self.formatter(f"{self.cat.my_name}은(는) {target.my_name}에게서 {amount}만큼의 츄르를 빼았아왔다!").single_block()
+                return BiteResult(cat=self.cat,result=True,churr=amount,target=target,message=msg)
+            else:
+                msg = self.formatter(f"{self.cat.my_name}은(는) {target.my_name}에게서 {amount}만큼의 츄르를 찾아 보았지만 그만큼은 없었다...")
+                return BiteResult(cat=self.cat,result=True,churr=amount,target=target,message=msg)
+        else:
+            msg = self.formatter(f"{self.cat.my_name}은(는) {self.formatter(name).bold().italic()}을(를) 찾지 못했다....")
+            return BiteResult(cat=self.cat,result=False,churr=amount,target=None,message=msg)
     
     def give_churr(self,amount=1):
         if self.cat.is_hungry and self.user.have_churr(amount=amount):
