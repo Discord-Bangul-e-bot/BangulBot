@@ -12,8 +12,8 @@ from MyBot.decorators import permission_check
 @permission_check
 async def 넌누구니(ctx,**kwargs):
     cat = Cat.get_cat_from_ctx(ctx)
-    msg = f"자기 이름은 {cat.name}(이)라고 하는 것 같다"
-    _msg = app.formatter.single_block(app.formatter.italic(msg))
+    msg = f"자기 이름은 {cat.my_name}(이)라고 하는 것 같다"
+    _msg = app.formatter(msg).single_block()
     await ctx.send(f"야옹? \n{_msg})")
     
 @app.command()
@@ -44,10 +44,10 @@ async def 츄르주기(ctx:CTX,args:int=1):
     if result.get('result'):
         msg = (app.formatter(f"{result.get('cat').name}").bold()
                .append(f"(이)가 츄르를 맛있게 먹었다\n공복도 : {result.get('hungry')}\n친밀도 + {amount}")).single_block()
-        await ctx.send(f"에에에에옹!")
+        await ctx.send(interaction.meow.enthusiastic())
         await ctx.send(msg)
     else:
-        await ctx.send("애옹?   ")
+        await ctx.send(interaction.meow.curious())
 
 @app.command()
 async def 친밀도(ctx:CTX):
