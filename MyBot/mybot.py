@@ -48,4 +48,14 @@ class MyBot(commands.Bot):
         cats = Cat.call_all()
         for cat in cats:
             cat.increase_hungry()
-           
+    
+    @tasks.loop(minutes=60.0)
+    async def announce_hungry(self):
+        cats = Cat.call_all()
+        for cat in cats:
+            guild = self.get_guild(cat.id)
+            if guild:
+                for channel in guild.channels:
+                    if channel.name =="급식소" and isinstance(channel,discord.TextChannel):
+                        if cat.is_hungry:
+                            await channel.send(f"{cat.my_name}은 배가 고픈 것 같다.")
