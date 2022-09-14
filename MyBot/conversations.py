@@ -43,9 +43,16 @@ async def 이제와도돼(ctx:CTX):
         await ctx.send(app.formatter(f"{interaction.cat.my_name}은(는) 반갑게 당신에게 달려들었다."))
 
 @app.command()
-async def 물어(ctx:CTX):
+async def 물어(ctx:CTX,name:str,amount:int=1):
     interaction = Interaction(ctx)
-    await ctx.send(interaction.meow.aggressive())
+    result = interaction.물어(name,amount)
+    if result.get('result'):
+        await ctx.send(interaction.meow.aggressive())
+        await ctx.send(result.get('message'))
+    else:
+        await ctx.send(interaction.meow.curious())
+        await ctx.send(result.get('message'))
+        
     
 @app.command()
 async def 사용자(ctx:Context):
@@ -65,7 +72,7 @@ async def 키트(ctx:CTX):
         msg = "까지마!"
     interaction = Interaction(ctx)
     await ctx.send(interaction.meow.enthusiastic())
-    await ctx.send(f"{app.formatter(f'{interaction.cat.name}').bold().italic()}은(는) {random.choice(msg)} 라고 말하는 것 같다.")
+    await ctx.send(f"{app.formatter(f'{interaction.cat.name}').bold().italic()}은(는) {msg} 라고 말하는 것 같다.")
 
 # @app.command()
 # async def 종료(ctx:Context):

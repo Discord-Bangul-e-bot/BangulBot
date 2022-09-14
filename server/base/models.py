@@ -1,6 +1,9 @@
 from datetime import datetime
 from typing import Optional
-from peewee import Model,IntegerField,DateTimeField,CharField,BigIntegerField,BigAutoField,BooleanField
+from peewee import (
+    Model,DateTimeField,
+    CharField,BigAutoField,BooleanField,
+    ModelSelect)
 from MyBot.formatter.Formatter import Formatter
 from server.base.settings import mysql_db
 
@@ -23,6 +26,14 @@ class BaseModel(Model):
     @property
     def my_name(self):
         return self.formatter(f"{self.name}").bold().italic()
+    
+    @classmethod
+    def find_by_name(cls,name:str):
+        users:ModelSelect[cls] = cls.select().where(cls.name==name) # type: ignore
+        if users.exists(mysql_db):
+            return users
+        else:
+            return None
 
 class PermissionModel(BaseModel):
     permission=BooleanField(default=True)
