@@ -42,5 +42,8 @@ class Handler(FileSystemEventHandler):
 
     def on_modified(self, event): #파일, 디렉터리가 수정되면 실행
         print(event)
+        path:str = event.src_path
+        if path.__contains__('pyc'):
+            return
         app.runDevServer()
         

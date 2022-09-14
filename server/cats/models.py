@@ -63,7 +63,7 @@ class Cat(BaseModel):
     
     @property
     def is_hungry(self):
-        if self.hungry >= 10:
+        if self.hungry >= 50:
             return True
         else:
             return False
